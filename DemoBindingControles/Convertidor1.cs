@@ -13,8 +13,8 @@ namespace DemoBindingControles
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var cadena = value as string;
-            switch (cadena.ToString().ToLower()) {
+            var cadena = (string) value;
+            switch (cadena.ToLower()) {
                 case "yes":
                 case "si":
                 case "oui":
@@ -26,7 +26,7 @@ namespace DemoBindingControles
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             MessageBox.Show("No pulses el checkbox con el ratón");
-            return "Error...";
+            return "Error desde el CONVERTIDOR!!!";
 
         }
     }

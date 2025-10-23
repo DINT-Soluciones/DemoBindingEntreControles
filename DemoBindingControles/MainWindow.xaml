@@ -5,37 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DemoBindingControles"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Binding entre controles" 
+        Height="530" Width="300"
+        MinHeight="450" MinWidth="350"
+        WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <local:Convertidor1 x:Key="YesNoToBoolean"/>
         <local:Convertidor2 x:Key="HacerVisible"/>
     </Window.Resources>
+
     <StackPanel>
-        <!-- Origen datos -->
+        <!-- Origen datos-1 -->
         <Label Content="Color" Margin="10,5,5,5"
-               FontSize="18" HorizontalAlignment="Left"/>
+               HorizontalAlignment="Left"/>
         <TextBox x:Name="colorTextBox" Margin="15,5,5,5"
                  Width="100" Text="Red"
                  HorizontalAlignment="Left"/>
 
         <Label Content="Tamaño de la letra" Margin="10,5,5,5"
-               FontSize="18" HorizontalAlignment="Left"/>
+               HorizontalAlignment="Left"/>
         <TextBox x:Name="sizeTextBox" Margin="15,5,5,5"
                Width="100" Text="20"
                HorizontalAlignment="Left"/>
 
+        <!-- Destino-1 -->
         <Label Content="Para copiar o actualizar el primer TextBox" HorizontalAlignment="Left" Margin="10,5,5,5"/>
         <TextBox x:Name="copiarTextBox" Margin="15,5,5,5"
                Width="100" 
                HorizontalAlignment="Left"
                Text="{Binding ElementName=colorTextBox,Path=Text,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                 />
-        <Label Content="Activar o desactivar CHECKBOX" Margin="10,5,5,5"
-               FontSize="18" HorizontalAlignment="Left"/>
+               />
+
+        <!-- Origen datos-2 -->
+        <Label Content="Activar o desactivar CHECKBOX: yes, no, oui" 
+               Margin="10,5,5,5"
+               HorizontalAlignment="Left"/>
         <TextBox x:Name="activarLabel" Margin="15,5,5,5"
-                 Width="100" Text="no"
+                 Width="200" Text="yes"
                  HorizontalAlignment="Left"/>
+
+        <!-- Destino-2 -->
         <CheckBox x:Name="yesnoCheckBox" Margin="15,15,5,5"
                   Content="Actualizar LABEL inferior"
                   HorizontalAlignment="Left"
@@ -45,15 +55,18 @@
                   />
 
         <!-- Destino -->
-        <Label Margin="10"
+        <GroupBox Header="RESULTADO GENERAL" Margin="10" Padding="10">
+            <Label
+               Content="Buenos días 2DAM-A."
+               Margin="10"
                HorizontalAlignment="Left"
                Foreground="{Binding ElementName=colorTextBox, Path=Text, Mode=OneWay}"
                FontSize="{Binding ElementName=sizeTextBox, Path=Text, Mode=OneWay}"
                Visibility="{Binding ElementName=yesnoCheckBox, Path=IsChecked,
                             Converter={StaticResource HacerVisible}}"
-               >
-               Buenos días 2DAM-A.
-        </Label>
-       
+            />
+
+        </GroupBox>
+
     </StackPanel>
 </Window>
